@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <title>Quizzer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/bootstrap.min.css" th:href="@{/bootstrap.min.css}" />
+</head>
+
+<body style="padding: 15px">
+    <div class="container">
+        <h1>Edit question</h1>
+            <form th:object="${question}" th:action="@{/quizzes/{quizId}/savequestion(quizId=${quizId})}" method="post">
+            <div>
+                <input type="hidden" th:field="*{questionId}" readonly="readonly">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="questionText">Question</label>
+                <input class="form-control" type="text" id="questionText" th:field="*{questionText}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="difficulty">Difficulty</label>
+                <select class="form-control" id="difficulty" th:field="*{difficulty}">
+                    <option th:each="difficulty : ${difficulties}" th:value="${difficulty}" th:text="${difficulty}">Difficulty</option>
+                </select>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Save" />
+            <a class="btn btn-secondary " href=/quizzes>Cancel</a>
+        </form>
+    </div>
+</body>
+
+</html>

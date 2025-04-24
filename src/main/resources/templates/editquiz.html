@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <title>Quizzer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/bootstrap.min.css" th:href="@{/bootstrap.min.css}" />
+</head>
+
+<body style="padding: 15px">
+    <div class="container">
+        <h1 th:text='|Edit "${quiz.name}"|'></h1>
+            <form th:object="${quiz}" th:action="@{/savequiz}" method="post">
+            <div>
+                <input type="hidden" th:field="*{quizId}" readonly="readonly">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="name">Name</label>
+                <input class="form-control" type="text" id="name" th:field="*{name}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" rows="2" id="description" th:field="*{description}"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="category">Category</label>
+                <select class="form-control" id="category" th:field="*{category}">
+                    <option th:each="category : ${categories}" th:value="${category.categoryId}" th:text="${category}">Category</option>
+                </select>
+            </div>
+            <div class="form-check mb-3">
+                <label class="form-check-label" for="published">Published</label>
+                <input class="form-check-input" type="checkbox" id="published" th:field="*{published}">
+            </div>
+            <input class="btn btn-primary" type="submit" value="Save" />
+            <a class="btn btn-secondary " href=/quizzes>Cancel</a>
+        </form>
+    </div>
+</body>
+
+</html>

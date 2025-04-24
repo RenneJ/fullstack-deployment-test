@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Quizzer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/bootstrap.min.css" th:href="@{/bootstrap.min.css}" />
+</head>
+<body style="padding: 15px">
+    <h1>Quizzer</h1>
+    <div>
+        <h2>Quizzes</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Published</th>
+                    <th>Created Date</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="quiz : ${quizzes}">
+                    <td th:text="${quiz.name}">Quiz Name</td>
+                    <td th:text="${quiz.description}">Quiz Description</td>
+                    <td th:text="${quiz.category}">Quiz Category</td>
+                    <td th:text="${quiz.published ? 'Yes' : 'No'}">Published</td>
+					<td th:text="${#temporals.format(quiz.created, 'yyyy-MM-dd HH:mm')}">Quiz Creation Time</td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{/quizzes/{quizId}(quizId=${quiz.quizId})}">See questions</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-success" th:href="@{/editquiz/{quizId}(quizId=${quiz.quizId})}">Edit</a>
+                    </td>
+                    <td>
+                        <form th:action="@{/deletequiz/{quizId}(quizId=${quiz.quizId})}" method="get" style="display:inline;">
+                            <input class="btn btn-danger btn-sm" type="submit" value="Delete"
+                                onclick="return confirm('Are you sure you want to delete this quiz?');" />
+                        </form>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary " href=/addquiz>Add a quiz</a>
+        <a class="btn btn-secondary " href=/categories>See Categories</a>
+    </div>
+</body>
+</html>

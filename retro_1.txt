@@ -1,0 +1,11 @@
+- ei pusketa kääntymätöntä koodia githubiin
+
+- errorin ilmetessä viesti discordiin ja linkki backlogiin
+
+# BUGFIXES TODO
+
+- quizin muokkaus ei saa muuttaa luontipäivää
+
+- cancel nappula vie edelliselle sivulle
+
+- delete palauttaa listasivun

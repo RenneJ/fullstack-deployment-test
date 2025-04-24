@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <title>Quizzer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/bootstrap.min.css" th:href="@{/bootstrap.min.css}" />
+</head>
+
+<body style="padding: 15px">
+    <h1 class="mb-3" th:text="${quiz.name}">Quiz Name</h1>
+    <div>
+        <h2>Questions</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Question Text</th>
+                    <th>Difficulty</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="question : ${questions}">
+                    <td th:text="${question.questionText}">Question Text</td>
+                    <td th:text="${question.difficulty}">Question Difficulty</td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{/questions/{questionId}(questionId=${question.questionId})}">See answers</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-success" th:href="@{/quizzes/{quizId}/editquestion/{questionId}(quizId=${quiz.quizId}, questionId=${question.questionId})}">Edit</a>
+                    </td>
+                    <td>
+                        <form th:action="@{/quizzes/{quizId}/deletequestion/{questionId}(quizId=${question.quiz.quizId}, questionId=${question.questionId})}" method="get" style="display:inline;">
+                            <input class="btn btn-danger btn-sm" type="submit" value="Delete"
+                                onclick="return confirm('Are you sure you want to delete this question?');" />
+                    </form>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary " th:href="@{/quizzes/{quizId}/addquestion(quizId=${quiz.quizId})}">Add a question</a>
+        <a class="btn btn-secondary " href=/quizzes>Cancel</a>
+    </div>
+</body>
+
+</html>
