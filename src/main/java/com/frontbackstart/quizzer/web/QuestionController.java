@@ -54,6 +54,8 @@ public class QuestionController {
     @PostMapping("/quizzes/{quizId}/savequestion")
     public String saveQuestion(@PathVariable Quiz quizId, @ModelAttribute("question") Question question) {
     	question.setQuiz(quizId);
+        question.setTotalAnswers(0);
+        question.setTotalRightAnswers(0);
         questionRepository.save(question);
         return "redirect:/questions/" + question.getQuestionId() + "/addanswer";
     }
