@@ -38,4 +38,3 @@ robot/*.html
 robot/*.xml
 robot/*.png
 frontend/quizzer/.env
-frontend/quizzer/.env.production
