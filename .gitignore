@@ -37,4 +37,4 @@ venv
 robot/*.html
 robot/*.xml
 robot/*.png
-frontend/quizzer/.env
+
